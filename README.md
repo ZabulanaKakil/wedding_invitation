@@ -17,18 +17,24 @@ All names, date, venue, maps links, dress colors, gallery images, family RSVP te
 
 Replace demo Unsplash photos by putting files in `public/images/` and pointing paths there.
 
-## Build for GitHub Pages (manual publish)
+## GitHub Pages
+
+Live site: https://zabulanakakil.github.io/wedding_invitation/
+
+This repo deploys with **GitHub Actions** (see `.github/workflows/deploy-pages.yml`).
+
+### One-time Pages setup
+1. Repo **Settings → Pages**
+2. Under **Build and deployment → Source**, choose **GitHub Actions**
+3. Push to `main` (or re-run the workflow). Wait for the green check on the **Actions** tab.
+
+`vite.config.ts` uses `base: './'` so assets resolve correctly under `/wedding_invitation/`.
+
+A `docs/` folder with a production build is also kept as a fallback. You can instead set Pages to **Deploy from branch → main → /docs**.
+
+### Local production build
 
 ```bash
 npm run build
-```
-
-Output is in `dist/`. Upload or push that folder yourself and enable GitHub Pages — this project does not auto-deploy.
-
-`vite.config.ts` uses `base: './'` so asset paths work from a project Pages URL. If needed, change it to `'/your-repo-name/'`.
-
-## Preview production build
-
-```bash
 npm run preview
 ```
