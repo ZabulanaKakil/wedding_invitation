@@ -21,18 +21,21 @@ Replace demo Unsplash photos by putting files in `public/images/` and pointing p
 
 Live site: https://zabulanakakil.github.io/wedding_invitation/
 
-This repo deploys with **GitHub Actions** (see `.github/workflows/deploy-pages.yml`).
+Root `index.html` redirects into `./dist/` (the production build).  
+Local `npm run dev` still opens the React app (via `index.dev.html`).
 
-### One-time Pages setup
-1. Repo **Settings → Pages**
-2. Under **Build and deployment → Source**, choose **GitHub Actions**
-3. Push to `main` (or re-run the workflow). Wait for the green check on the **Actions** tab.
+### After you change the site
 
-`vite.config.ts` uses `base: './'` so assets resolve correctly under `/wedding_invitation/`.
+```bash
+npm run build
+git add -f dist
+git commit -m "Update Pages build"
+git push
+```
 
-A `docs/` folder with a production build is also kept as a fallback. You can instead set Pages to **Deploy from branch → main → /docs**.
+Optional: set **Settings → Pages → Source** to **GitHub Actions** (workflow included) or **Deploy from branch → /docs**.
 
-### Local production build
+### Preview production build locally
 
 ```bash
 npm run build
