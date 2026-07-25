@@ -97,8 +97,9 @@ export function WeddingDate() {
           <p className="mt-6 text-center font-display text-xl font-semibold text-[var(--sage)]">
             {weddingDate.display}
           </p>
-          <p className="mt-1 text-center font-body text-sm text-[var(--ink-soft)]">
-            {weddingDate.time}
+          <p className="wedding-time mt-4 text-center">
+            <span className="wedding-time__label">Ceremony begins</span>
+            <span className="wedding-time__value">{weddingDate.time}</span>
           </p>
         </div>
       </Reveal>

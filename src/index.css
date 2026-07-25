@@ -126,25 +126,12 @@ button {
   );
 }
 
-.section-from-blush-to-sage {
-  /* Dress (blush) → Gallery (sage content) */
+.section-from-blush-to-paper-end {
+  /* Dress (blush) → RSVP (paper content) */
   background: linear-gradient(
     180deg,
-    #d9b8b3 0%,
-    #b8a89a 4%,
-    var(--sage-mid) 8%,
-    var(--sage) 11%,
-    var(--sage) 100%
-  );
-}
-
-.section-from-sage-to-paper-end {
-  /* Gallery (sage) → RSVP (paper content) */
-  background: linear-gradient(
-    180deg,
-    var(--sage) 0%,
-    var(--sage-mid) 4%,
-    #cfd4c4 8%,
+    #e0b8b2 0%,
+    #ecd6cf 5%,
     var(--paper) 11%,
     var(--paper) 100%
   );
@@ -168,26 +155,15 @@ button {
   box-shadow: 0 1px 4px rgba(184, 146, 90, 0.35);
 }
 
-/* Smooth scroll + appear-on-scroll */
+/* Smooth scroll — avoid forcing smooth on all mobiles (can jank) */
 .invite-scroll {
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 
-.section-enter {
-  animation: fadeUp 0.85s cubic-bezier(0.22, 0.82, 0.2, 1) both;
-}
-
-.section-enter-delay-1 {
-  animation-delay: 0.08s;
-}
-
-.section-enter-delay-2 {
-  animation-delay: 0.16s;
-}
-
-.section-enter-delay-3 {
-  animation-delay: 0.24s;
+@supports (scroll-behavior: smooth) {
+  .invite-scroll {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Taller content sections */
@@ -200,34 +176,62 @@ button {
   box-sizing: border-box;
 }
 
-.invite-section--gallery {
-  min-height: 88dvh;
-  padding-block: 5rem;
+/*
+  Mobile-safe appear: CSS transition only (no filter/blur — breaks on iOS Safari).
+  translate3d for compositor layer.
+*/
+.reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.82, 0.2, 1),
+    transform 0.7s cubic-bezier(0.22, 0.82, 0.2, 1);
+  will-change: opacity, transform;
 }
 
-.reveal-hidden {
+.reveal--out {
   opacity: 0;
-  transform: translateY(36px) scale(0.985);
-  filter: blur(3px);
+  transform: translate3d(0, 28px, 0);
   pointer-events: none;
 }
 
-.reveal-visible {
-  animation: fadeUp 1s cubic-bezier(0.22, 0.82, 0.2, 1) both;
+.reveal--in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
   pointer-events: auto;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(36px) scale(0.985);
-    filter: blur(3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
+/* High-contrast ceremony time badge */
+.wedding-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-inline: auto;
+  max-width: 16rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(145deg, #2a4d3d 0%, #1a3329 55%, #12261d 100%);
+  box-shadow:
+    0 10px 24px rgba(13, 26, 20, 0.28),
+    0 0 0 1px rgba(212, 184, 136, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.wedding-time__label {
+  font-family: var(--font-seal);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8d4a8;
+}
+
+.wedding-time__value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fffaf3;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 /* High-contrast CTAs */
@@ -425,8 +429,7 @@ button {
     scroll-behavior: auto;
   }
 
-  .section-enter,
-  .reveal-visible,
+  .reveal,
   .envelope-upper--open,
   .envelope-lower--open,
   .envelope-card--rising,
@@ -436,10 +439,11 @@ button {
     transition: none !important;
   }
 
-  .reveal-hidden {
+  .reveal--out,
+  .reveal--in {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
+    pointer-events: auto !important;
   }
 
   .envelope-card--hidden,
@@ -454,30 +458,37 @@ button {
   .envelope-frame--gone {
     opacity: 0 !important;
   }
+}
 
-  .gallery-track {
-    scroll-behavior: auto !important;
+/* Prefer % over large vh distances on mobile (address-bar resize jitter) */
+@supports (height: 100dvh) {
+  @keyframes upperSlideAway {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    82% {
+      transform: translate3d(0, -110dvh, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, -125dvh, 0);
+      opacity: 0;
+    }
   }
-}
 
-.gallery-shell {
-  touch-action: pan-x;
-}
-
-.gallery-track {
-  touch-action: pan-x;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  /* Instant jumps for the infinite-loop reset — smooth fights swipe */
-  scroll-behavior: auto;
-}
-
-.gallery-track::-webkit-scrollbar {
-  display: none;
-}
-
-.gallery-slide {
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  will-change: transform, opacity;
+  @keyframes lowerSlideAway {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    82% {
+      transform: translate3d(0, 110dvh, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 125dvh, 0);
+      opacity: 0;
+    }
+  }
 }

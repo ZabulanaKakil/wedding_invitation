@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { DressCode } from './components/DressCode'
-import { GalleryCarousel } from './components/GalleryCarousel'
 import { IntroEnvelope } from './components/IntroEnvelope'
 import { LoveStory } from './components/LoveStory'
 import { PhoneShell } from './components/PhoneShell'
@@ -16,7 +15,11 @@ export default function App() {
     <PhoneShell allowOverflow={envelopeOpening && !scrollUnlocked}>
       <main
         className={`invite-scroll h-full overscroll-y-contain ${
-          scrollUnlocked ? 'overflow-y-auto' : envelopeOpening ? 'overflow-visible' : 'overflow-y-hidden'
+          scrollUnlocked
+            ? 'overflow-y-auto'
+            : envelopeOpening
+              ? 'overflow-visible'
+              : 'overflow-y-hidden'
         }`}
         style={{ touchAction: scrollUnlocked ? 'manipulation' : 'none' }}
       >
@@ -31,7 +34,6 @@ export default function App() {
         <WeddingDate />
         <Venue />
         <DressCode />
-        <GalleryCarousel />
         <Rsvp />
       </main>
     </PhoneShell>

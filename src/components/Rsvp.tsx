@@ -10,7 +10,7 @@ export function Rsvp() {
     <section
       id="section-rsvp"
       data-section
-      className="invite-section section-from-sage-to-paper-end px-6 pb-24"
+      className="invite-section section-from-blush-to-paper-end px-6 pb-24"
     >
       <Reveal>
         <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">

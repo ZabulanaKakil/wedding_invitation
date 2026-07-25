@@ -40,15 +40,18 @@ export const content = {
   },
 
   venue: {
-    name: 'Hotel Radisson',
-    subtitle: 'Radisson Blu Dhaka Water Garden',
-    address: 'Airport Road, Dhaka 1206, Bangladesh',
-    /** Interactive embed — guests can pan, zoom, and explore nearby places */
+    name: 'Sena Prangon',
+    subtitle: 'Dhaka Cantonment',
+    address: 'MP Checkpost, Matikata Road, Dhaka Cantonment, Bangladesh',
+    photo: 'images/venue-sena-prangon.png',
+    photoAlt: 'Celebration hall at Sena Prangon',
+    details:
+      'A secure cantonment convention venue opposite Matikata Bus Stop — spacious halls, ample parking, and easy access by CNG, bus, or metro (Mirpur 11 / Pallabi).',
+    note: 'Please allow a little extra time for gate security at the cantonment entrance.',
     embedUrl:
-      'https://www.google.com/maps?q=Radisson+Blu+Dhaka+Water+Garden&output=embed',
-    /** Opens full Google Maps for directions / navigation */
+      'https://www.google.com/maps?q=Senaprangan+Matikata+Road+Dhaka+Cantonment&output=embed',
     mapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Radisson+Blu+Dhaka+Water+Garden',
+      'https://www.google.com/maps/search/?api=1&query=Senaprangan+Matikata+Road+Dhaka+Cantonment',
   },
 
   dressCode: {
@@ -62,6 +65,7 @@ export const content = {
     ],
   },
 
+  /** Private — not shown on the public invite */
   gallery: [
     { src: 'images/image1.png', alt: 'Wedding photo 1' },
     { src: 'images/image2.png', alt: 'Wedding photo 2' },

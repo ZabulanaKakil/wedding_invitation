@@ -33,7 +33,10 @@ type RevealProps = {
   delay?: number
 }
 
-/** Fade-up when the block enters the invite scroll viewport. */
+/**
+ * Appear-on-scroll for mobile Safari & Chrome.
+ * Uses CSS transitions (not blur filters) — blur/filter anims often fail on iOS.
+ */
 export function Reveal({
   children,
   className = '',
@@ -53,13 +56,19 @@ export function Reveal({
       return
     }
 
+    // Fallback if IntersectionObserver is missing / flaky
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true)
+      return
+    }
+
     const root =
       (el.closest('.invite-scroll') as Element | null) ?? null
 
     let timer: number | undefined
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
           if (delay > 0) {
             timer = window.setTimeout(() => setVisible(true), delay)
           } else {
@@ -70,10 +79,30 @@ export function Reveal({
           setVisible(false)
         }
       },
-      { root, threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+      {
+        root,
+        // Lower threshold + positive bottom margin: fires earlier on short mobile viewports
+        threshold: [0, 0.05, 0.12],
+        rootMargin: '0px 0px 12% 0px',
+      },
     )
 
     io.observe(el)
+
+    // Safety: if already in view on mount (IO sometimes misses on iOS), reveal
+    requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect()
+      const viewH = window.innerHeight || document.documentElement.clientHeight
+      if (rect.top < viewH * 0.92 && rect.bottom > 0) {
+        if (delay > 0) {
+          timer = window.setTimeout(() => setVisible(true), delay)
+        } else {
+          setVisible(true)
+        }
+        if (once) io.disconnect()
+      }
+    })
+
     return () => {
       if (timer !== undefined) window.clearTimeout(timer)
       io.disconnect()
@@ -83,7 +112,7 @@ export function Reveal({
   return (
     <div
       ref={ref}
-      className={`${className} ${visible ? 'reveal-visible' : 'reveal-hidden'}`}
+      className={`${className} reveal ${visible ? 'reveal--in' : 'reveal--out'}`}
     >
       {children}
     </div>

@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { content } from '../content'
 import { Reveal } from './PhoneShell'
 
+const asset = (path: string) =>
+  path.startsWith('http') ? path : `${import.meta.env.BASE_URL}${path}`
+
 export function Venue() {
   const { venue } = content
   const mapRef = useRef<HTMLDivElement>(null)
@@ -19,7 +22,7 @@ export function Venue() {
           io.disconnect()
         }
       },
-      { root, rootMargin: '120px 0px', threshold: 0.05 },
+      { root, rootMargin: '160px 0px', threshold: 0.01 },
     )
 
     io.observe(el)
@@ -36,13 +39,13 @@ export function Venue() {
         <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">
           Where we celebrate
         </p>
-        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(26,51,41,0.12)]">
+        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)]">
           Venue
         </h2>
         <div className="gold-rule mt-4" />
 
         <div className="mt-8 text-center">
-          <h3 className="font-display text-2xl font-semibold text-[var(--ink)] drop-shadow-[0_1px_2px_rgba(31,26,22,0.08)]">
+          <h3 className="font-display text-2xl font-semibold text-[var(--ink)]">
             {venue.name}
           </h3>
           <p className="mt-1 font-display text-lg italic text-[var(--ink-soft)]">
@@ -53,9 +56,29 @@ export function Venue() {
           </p>
         </div>
 
+        <figure className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(184,146,90,0.4)]">
+          <img
+            src={asset(venue.photo)}
+            alt={venue.photoAlt}
+            className="aspect-[16/10] w-full object-cover"
+            width={1200}
+            height={750}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption className="space-y-2 bg-[rgba(250,246,241,0.92)] px-4 py-4 text-center">
+            <p className="font-body text-sm leading-relaxed text-[var(--ink)]">
+              {venue.details}
+            </p>
+            <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[var(--champagne)]">
+              {venue.note}
+            </p>
+          </figcaption>
+        </figure>
+
         <div
           ref={mapRef}
-          className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(184,146,90,0.45)]"
+          className="surface-deep mt-5 overflow-hidden rounded-xl border border-[rgba(184,146,90,0.45)]"
         >
           <div className="relative aspect-[4/3] w-full bg-[var(--paper)]">
             {showMap ? (
