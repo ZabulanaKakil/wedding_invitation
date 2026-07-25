@@ -43,7 +43,7 @@ export const content = {
     name: 'Sena Prangon',
     subtitle: 'Dhaka Cantonment',
     address: 'MP Checkpost, Matikata Road, Dhaka Cantonment, Bangladesh',
-    photo: 'images/senaprangon.png',
+    photo: 'images/senaprangan.png',
     photoAlt: 'Celebration hall at Sena Prangon',
     details:
       'A secure cantonment convention venue opposite Matikata Bus Stop — spacious halls, ample parking, and easy access by CNG, bus, or metro (Mirpur 11 / Pallabi).',
