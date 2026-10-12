@@ -21,7 +21,7 @@ export function Rsvp() {
         </h2>
         <div className="gold-rule mt-4" />
 
-        <p className="mt-8 text-center font-script text-[2.35rem] leading-none text-[var(--sage)]">
+        <p className="mt-8 text-center font-script text-[2.35rem] leading-snug text-[var(--sage)]">
           {rsvp.greeting}
         </p>
 
@@ -39,20 +39,20 @@ export function Rsvp() {
               <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-[var(--champagne)]">
                 {family.side}
               </p>
-              <p className="mt-2 font-script text-[1.65rem] leading-none text-[var(--ink)]">
+              <p className="mt-2 font-script text-[1.65rem] leading-snug text-[var(--ink)]">
                 {family.father}
               </p>
-              <p className="my-1 font-script text-xl leading-none text-[var(--champagne)]">
+              <p className="my-1 font-script text-xl leading-snug text-[var(--champagne)]">
                 &
               </p>
-              <p className="font-script text-[1.65rem] leading-none text-[var(--ink)]">
+              <p className="font-script text-[1.65rem] leading-snug text-[var(--ink)]">
                 {family.mother}
               </p>
               <div className="gold-rule mt-3 opacity-70" />
               <p className="mt-3 font-display text-sm uppercase tracking-[0.2em] text-[var(--sage-soft)]">
                 {family.role}
               </p>
-              <p className="mt-1 font-script text-[2rem] leading-none text-[var(--sage)]">
+              <p className="mt-1 font-script text-[2rem] leading-snug text-[var(--sage)]">
                 {family.child}
               </p>
             </div>

@@ -112,11 +112,11 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
                 <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">
                   {couple.announcement}
                 </p>
-                <h1 className="mt-2 font-script text-[2.6rem] leading-none text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
+                <h1 className="mt-2 font-script text-[2.6rem] leading-snug text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
                   {couple.groom}
                 </h1>
                 <p className="my-1 font-script text-2xl text-[var(--champagne)]">&</p>
-                <h1 className="font-script text-[2.6rem] leading-none text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
+                <h1 className="font-script text-[2.6rem] leading-snug text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
                   {couple.bride}
                 </h1>
                 <p className="mt-4 font-display text-sm font-medium italic text-[var(--ink-soft)]">
@@ -183,7 +183,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             </div>
 
             <p
-              className={`pointer-events-none absolute inset-x-0 top-[22%] z-[5] text-center font-script text-[2.5rem] leading-none text-[#2a1c14] transition-opacity duration-300 ${
+              className={`pointer-events-none absolute inset-x-0 top-[22%] z-[5] text-center font-script text-[2.5rem] leading-snug text-[#2a1c14] transition-opacity duration-300 ${
                 phase === 'closed' ? 'opacity-100' : 'opacity-0'
               }`}
             >
