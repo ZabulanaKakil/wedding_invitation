@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { content } from '../content'
 import { Reveal } from './PhoneShell'
 
-const asset = (path: string) =>
-  path.startsWith('http') ? path : `${import.meta.env.BASE_URL}${path}`
-
 export function Venue() {
   const { venue } = content
   const mapRef = useRef<HTMLDivElement>(null)
@@ -54,31 +51,14 @@ export function Venue() {
           <p className="mt-2 font-body text-sm leading-relaxed text-[var(--ink-soft)]">
             {venue.address}
           </p>
+          <p className="mx-auto mt-4 max-w-[18rem] font-body text-sm leading-relaxed text-[var(--ink)]">
+            {venue.details}
+          </p>
         </div>
-
-        <figure className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(184,146,90,0.4)]">
-          <img
-            src={asset(venue.photo)}
-            alt={venue.photoAlt}
-            className="aspect-[16/10] w-full object-cover"
-            width={1200}
-            height={750}
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption className="space-y-2 bg-[rgba(250,246,241,0.92)] px-4 py-4 text-center">
-            <p className="font-body text-sm leading-relaxed text-[var(--ink)]">
-              {venue.details}
-            </p>
-            <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[var(--champagne)]">
-              {venue.note}
-            </p>
-          </figcaption>
-        </figure>
 
         <div
           ref={mapRef}
-          className="surface-deep mt-5 overflow-hidden rounded-xl border border-[rgba(184,146,90,0.45)]"
+          className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(20,18,16,0.16)]"
         >
           <div className="relative aspect-[4/3] w-full bg-[var(--paper)]">
             {showMap ? (
@@ -87,7 +67,7 @@ export function Venue() {
                 src={venue.embedUrl}
                 className="absolute inset-0 h-full w-full border-0"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             ) : (

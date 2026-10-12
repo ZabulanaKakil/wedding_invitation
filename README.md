@@ -11,31 +11,22 @@ npm run dev
 
 ## Edit content
 
-All names, date, venue, maps links, dress colors, gallery images, family RSVP text, and the Google Form URL live in:
-
-[`src/content.ts`](src/content.ts)
-
-Replace demo Unsplash photos by putting files in `public/images/` and pointing paths there.
+Names, date, venue, map links, family lines, and the Google Form URL live in [`src/content.ts`](src/content.ts). Photos used by the card live in `public/images/`.
 
 ## GitHub Pages
 
-Live site: https://zabulanakakil.github.io/wedding_invitation/
+Live site: https://zabulanakakil.github.io/wedding_invitation/dist/
 
-Root `index.html` redirects into `./dist/` (the production build).  
-Local `npm run dev` still opens the React app (via `index.dev.html`).
-
-### After you change the site
+The published card is the `dist/` folder. After changing the invitation:
 
 ```bash
 npm run build
 git add -f dist
-git commit -m "Update Pages build"
+git commit
 git push
 ```
 
-Optional: set **Settings → Pages → Source** to **GitHub Actions** (workflow included) or **Deploy from branch → /docs**.
-
-### Preview production build locally
+### Preview the production build locally
 
 ```bash
 npm run build

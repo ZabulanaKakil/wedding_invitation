@@ -1,22 +1,22 @@
 @import 'tailwindcss';
 
 :root {
-  --sage: #1a3329;
-  --sage-mid: #2a4d3d;
-  --sage-soft: #4a6b58;
-  --blush: #e8c4c0;
-  --blush-deep: #b87a72;
-  --champagne: #b8925a;
-  --champagne-bright: #d4b888;
-  --pearl: #faf6f1;
-  --ink: #1f1a16;
-  --ink-soft: #4a4038;
-  --paper: #f3ebe3;
-  --paper-deep: #e4d8cc;
-  --shadow: rgba(26, 51, 41, 0.32);
-  --shadow-soft: rgba(31, 26, 22, 0.14);
-  --shadow-lift: 0 10px 28px var(--shadow-soft), 0 2px 8px rgba(31, 26, 22, 0.08);
-  --shadow-deep: 0 18px 44px rgba(13, 26, 20, 0.28), 0 4px 12px rgba(13, 26, 20, 0.16);
+  --sage: #141210;
+  --sage-mid: #2c2824;
+  --sage-soft: #5c564e;
+  --blush: #f3eadc;
+  --blush-deep: #d9cfc0;
+  --champagne: #1c1916;
+  --champagne-bright: #f4ead8;
+  --pearl: #faf6f0;
+  --ink: #141210;
+  --ink-soft: #4a453e;
+  --paper: #f7f1e6;
+  --paper-deep: #e8dfd2;
+  --shadow: rgba(12, 10, 8, 0.32);
+  --shadow-soft: rgba(20, 16, 12, 0.14);
+  --shadow-lift: 0 10px 28px var(--shadow-soft), 0 2px 8px rgba(20, 16, 12, 0.08);
+  --shadow-deep: 0 18px 44px rgba(12, 10, 8, 0.28), 0 4px 12px rgba(12, 10, 8, 0.16);
 
   --font-script: 'Great Vibes', cursive;
   --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -83,7 +83,7 @@ button {
 /* Soft paper atmosphere — mostly solid, tiny top blend only */
 .invite-bg {
   background:
-    radial-gradient(ellipse 100% 40% at 50% -8%, rgba(232, 196, 192, 0.22), transparent 42%),
+    radial-gradient(ellipse 100% 40% at 50% -8%, rgba(255, 250, 240, 0.65), transparent 42%),
     linear-gradient(180deg, var(--paper) 0%, var(--paper) 92%, var(--paper-deep) 100%);
 }
 
@@ -92,11 +92,11 @@ button {
   Rest of each section is solid so headings/body keep WCAG contrast.
 */
 .section-from-paper-to-sage {
-  /* Love Story (paper) → Date (sage content) */
+  /* Love Story (cream) → Date (black) */
   background: linear-gradient(
     180deg,
     var(--paper-deep) 0%,
-    #c5cbb8 4%,
+    #c9c1b6 4%,
     var(--sage-mid) 8%,
     var(--sage) 11%,
     var(--sage) 100%
@@ -104,36 +104,23 @@ button {
 }
 
 .section-from-sage-to-paper {
-  /* Date (sage) → Venue (paper content) */
+  /* Date (black) → Venue (cream) */
   background: linear-gradient(
     180deg,
     var(--sage) 0%,
     var(--sage-mid) 4%,
-    #c8cfc0 8%,
+    #c9c1b6 8%,
     var(--paper) 11%,
     var(--paper) 100%
   );
 }
 
-.section-from-paper-to-blush {
-  /* Venue (paper) → Dress (blush content) */
+.section-paper {
   background: linear-gradient(
     180deg,
     var(--paper) 0%,
-    #ecd6cf 5%,
-    var(--blush) 9%,
-    #e0b8b2 100%
-  );
-}
-
-.section-from-blush-to-paper-end {
-  /* Dress (blush) → RSVP (paper content) */
-  background: linear-gradient(
-    180deg,
-    #e0b8b2 0%,
-    #ecd6cf 5%,
-    var(--paper) 11%,
-    var(--paper) 100%
+    var(--paper) 88%,
+    var(--paper-deep) 100%
   );
 }
 
@@ -141,7 +128,7 @@ button {
 .section-from-envelope-to-paper {
   background: linear-gradient(
     180deg,
-    #f7f0de 0%,
+    #f7f1e6 0%,
     var(--paper) 7%,
     var(--paper) 100%
   );
@@ -151,8 +138,8 @@ button {
   height: 1px;
   width: 4.5rem;
   margin-inline: auto;
-  background: linear-gradient(90deg, transparent, var(--champagne), transparent);
-  box-shadow: 0 1px 4px rgba(184, 146, 90, 0.35);
+  background: linear-gradient(90deg, transparent, var(--ink), transparent);
+  box-shadow: 0 1px 4px rgba(20, 16, 12, 0.18);
 }
 
 /* Smooth scroll — avoid forcing smooth on all mobiles (can jank) */
@@ -209,10 +196,10 @@ button {
   max-width: 16rem;
   padding: 0.85rem 1.1rem;
   border-radius: 0.9rem;
-  background: linear-gradient(145deg, #2a4d3d 0%, #1a3329 55%, #12261d 100%);
+  background: linear-gradient(145deg, #2c2824 0%, #141210 55%, #0c0b0a 100%);
   box-shadow:
-    0 10px 24px rgba(13, 26, 20, 0.28),
-    0 0 0 1px rgba(212, 184, 136, 0.45),
+    0 10px 24px rgba(12, 10, 8, 0.28),
+    0 0 0 1px rgba(244, 234, 216, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
@@ -222,7 +209,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #e8d4a8;
+  color: #f4ead8;
 }
 
 .wedding-time__value {
@@ -237,9 +224,9 @@ button {
 /* High-contrast CTAs */
 .btn-primary {
   color: var(--pearl);
-  background: linear-gradient(145deg, #3a6452 0%, var(--sage) 55%, #14241c 100%);
+  background: linear-gradient(145deg, #2c2824 0%, #141210 55%, #0c0b0a 100%);
   box-shadow:
-    0 12px 28px rgba(20, 36, 28, 0.35),
+    0 12px 28px rgba(12, 10, 8, 0.35),
     0 2px 0 rgba(255, 255, 255, 0.12) inset;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
@@ -249,11 +236,12 @@ button {
 }
 
 .btn-gold {
-  color: #1f1a16;
-  background: linear-gradient(145deg, #ecd9b0 0%, var(--champagne-bright) 40%, var(--champagne) 100%);
+  color: var(--pearl);
+  background: linear-gradient(145deg, #2c2824 0%, #141210 55%, #0c0b0a 100%);
   box-shadow:
-    0 14px 32px rgba(154, 122, 72, 0.38),
-    0 2px 0 rgba(255, 255, 255, 0.35) inset;
+    0 14px 32px rgba(12, 10, 8, 0.32),
+    0 2px 0 rgba(255, 255, 255, 0.12) inset;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .btn-gold:active {

@@ -14,7 +14,7 @@ export function LoveStory() {
         <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">
           How it began
         </p>
-        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(26,51,41,0.12)]">
+        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(20,16,12,0.12)]">
           {loveStory.title}
         </h2>
         <div className="gold-rule mt-4" />

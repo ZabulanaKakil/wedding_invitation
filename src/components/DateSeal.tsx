@@ -17,19 +17,19 @@ export function DateSeal({ day, className = '' }: DateSealProps) {
       >
         <defs>
           <radialGradient id="sealWax" cx="38%" cy="32%" r="68%">
-            <stop offset="0%" stopColor="#5a8a72" />
-            <stop offset="45%" stopColor="#2d5242" />
-            <stop offset="100%" stopColor="#163026" />
+            <stop offset="0%" stopColor="#3a3530" />
+            <stop offset="45%" stopColor="#1a1614" />
+            <stop offset="100%" stopColor="#0c0b0a" />
           </radialGradient>
           <radialGradient id="sealShine" cx="35%" cy="28%" r="55%">
             <stop offset="0%" stopColor="#fff" stopOpacity="0.24" />
             <stop offset="55%" stopColor="#fff" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="sealGold" x1="0" y1="0" x2="120" y2="120">
-            <stop offset="0%" stopColor="#e8d4a8" />
-            <stop offset="40%" stopColor="#c4a574" />
-            <stop offset="70%" stopColor="#a8844a" />
-            <stop offset="100%" stopColor="#d4b888" />
+            <stop offset="0%" stopColor="#faf6f0" />
+            <stop offset="40%" stopColor="#f4ead8" />
+            <stop offset="70%" stopColor="#e4d7c2" />
+            <stop offset="100%" stopColor="#f7f1e6" />
           </linearGradient>
         </defs>
 
@@ -62,12 +62,12 @@ export function DateSeal({ day, className = '' }: DateSealProps) {
           cy="52"
           r="33.5"
           fill="none"
-          stroke="#e8c4c0"
+          stroke="#f4ead8"
           strokeWidth="1"
           opacity="0.55"
         />
 
-        <g fill="#d4b888" opacity="0.8">
+        <g fill="#f4ead8" opacity="0.8">
           <circle cx="60" cy="21.5" r="1.35" />
           <circle cx="72" cy="23.5" r="1.35" />
           <circle cx="82" cy="30" r="1.35" />
@@ -90,7 +90,7 @@ export function DateSeal({ day, className = '' }: DateSealProps) {
 
         <path
           d="M42 34 C48 30 54 30 60 34 C66 30 72 30 78 34"
-          stroke="#d4b888"
+          stroke="#f4ead8"
           strokeWidth="1.1"
           strokeLinecap="round"
           fill="none"

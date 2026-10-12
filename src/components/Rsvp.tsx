@@ -10,13 +10,13 @@ export function Rsvp() {
     <section
       id="section-rsvp"
       data-section
-      className="invite-section section-from-blush-to-paper-end px-6 pb-24"
+      className="invite-section section-paper px-6 pb-24"
     >
       <Reveal>
         <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">
           Kindly reply
         </p>
-        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(26,51,41,0.12)]">
+        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(20,16,12,0.12)]">
           {rsvp.title}
         </h2>
         <div className="gold-rule mt-4" />
@@ -76,7 +76,7 @@ export function Rsvp() {
           {rsvp.formButtonLabel}
         </a>
 
-        <p className="mt-12 text-center font-script text-3xl text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(26,51,41,0.12)]">
+        <p className="mt-12 text-center font-script text-3xl text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(20,16,12,0.12)]">
           {groomFirst} & {brideFirst}
         </p>
         <p className="mt-2 text-center font-seal text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">

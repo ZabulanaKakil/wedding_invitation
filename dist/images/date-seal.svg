@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-hidden="true">
   <defs>
     <radialGradient id="wax" cx="38%" cy="32%" r="68%">
-      <stop offset="0%" stop-color="#5a8a72"/>
-      <stop offset="45%" stop-color="#2d5242"/>
-      <stop offset="100%" stop-color="#163026"/>
+      <stop offset="0%" stop-color="#3a3530"/>
+      <stop offset="45%" stop-color="#1a1614"/>
+      <stop offset="100%" stop-color="#0c0b0a"/>
     </radialGradient>
     <radialGradient id="waxShine" cx="35%" cy="28%" r="55%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
       <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="goldRing" x1="0" y1="0" x2="120" y2="120">
-      <stop offset="0%" stop-color="#e8d4a8"/>
-      <stop offset="40%" stop-color="#c4a574"/>
-      <stop offset="70%" stop-color="#a8844a"/>
-      <stop offset="100%" stop-color="#d4b888"/>
+      <stop offset="0%" stop-color="#faf6f0"/>
+      <stop offset="40%" stop-color="#f4ead8"/>
+      <stop offset="70%" stop-color="#e4d7c2"/>
+      <stop offset="100%" stop-color="#f7f1e6"/>
     </linearGradient>
     <filter id="sealShadow" x="-20%" y="-15%" width="140%" height="145%">
-      <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#0d1a14" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#0c0b0a" flood-opacity="0.45"/>
     </filter>
   </defs>
 
@@ -39,10 +39,10 @@
   </g>
 
   <circle cx="60" cy="52" r="38" fill="none" stroke="url(#goldRing)" stroke-width="2.4" opacity="0.95"/>
-  <circle cx="60" cy="52" r="33.5" fill="none" stroke="#e8c4c0" stroke-width="1" opacity="0.55"/>
+  <circle cx="60" cy="52" r="33.5" fill="none" stroke="#f4ead8" stroke-width="1" opacity="0.55"/>
 
   <!-- Rope / bead inner ring -->
-  <g fill="#d4b888" opacity="0.75">
+  <g fill="#f4ead8" opacity="0.75">
     <circle cx="60" cy="21.5" r="1.35"/>
     <circle cx="72" cy="23.5" r="1.35"/>
     <circle cx="82" cy="30" r="1.35"/>
@@ -66,7 +66,7 @@
   <!-- Tiny flourish -->
   <path
     d="M42 34 C48 30 54 30 60 34 C66 30 72 30 78 34"
-    stroke="#d4b888"
+    stroke="#f4ead8"
     stroke-width="1.1"
     stroke-linecap="round"
     fill="none"

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DressCode } from './components/DressCode'
 import { IntroEnvelope } from './components/IntroEnvelope'
 import { LoveStory } from './components/LoveStory'
 import { PhoneShell } from './components/PhoneShell'
@@ -33,7 +32,6 @@ export default function App() {
         <LoveStory />
         <WeddingDate />
         <Venue />
-        <DressCode />
         <Rsvp />
       </main>
     </PhoneShell>

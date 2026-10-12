@@ -3,8 +3,8 @@ import { content } from '../content'
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
-const PAPER = '#F7F0DE'
-const CARD = '#F8F2E9'
+const PAPER = '#F7F1E6'
+const CARD = '#FBF7F0'
 
 type IntroEnvelopeProps = {
   onOpening?: () => void

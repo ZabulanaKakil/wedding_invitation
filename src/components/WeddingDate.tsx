@@ -60,11 +60,11 @@ export function WeddingDate() {
           className="gold-rule mt-4"
           style={{
             background:
-              'linear-gradient(90deg, transparent, var(--champagne-bright), transparent)',
+              'linear-gradient(90deg, transparent, #f4ead8, transparent)',
           }}
         />
 
-        <div className="surface-deep mx-auto mt-8 max-w-[320px] rounded-2xl border border-[rgba(212,184,136,0.4)] bg-[rgba(250,246,241,0.97)] p-5">
+        <div className="surface-deep mx-auto mt-8 max-w-[320px] rounded-2xl border border-[rgba(244,234,216,0.55)] bg-[rgba(250,246,240,0.97)] p-5">
           <p className="text-center font-display text-2xl font-semibold tracking-wide text-[var(--sage)]">
             {MONTHS[weddingDate.month]} {weddingDate.year}
           </p>
