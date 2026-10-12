@@ -86,7 +86,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             aria-hidden={phase === 'closed'}
           >
             <div
-              className="flex h-full w-full flex-col items-center justify-center overflow-y-auto px-6 pb-10 pt-10 text-center"
+              className="flex h-full w-full flex-col items-center justify-center overflow-y-auto px-6 pb-24 pt-6 text-center"
               style={{
                 backgroundColor: CARD,
                 boxShadow: cardOut

@@ -18,7 +18,7 @@
   --shadow-lift: 0 10px 28px var(--shadow-soft), 0 2px 8px rgba(20, 16, 12, 0.08);
   --shadow-deep: 0 18px 44px rgba(12, 10, 8, 0.28), 0 4px 12px rgba(12, 10, 8, 0.16);
 
-  --font-script: 'Miama', 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Montez', 'Cormorant Garamond', Georgia, serif;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Lora', Georgia, 'Times New Roman', serif;
   --font-seal: 'Cinzel', 'Cormorant Garamond', serif;
@@ -64,19 +64,11 @@ button {
   cursor: pointer;
 }
 
-@font-face {
-  font-family: Miama;
-  src: url('./fonts/Miama-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 .font-script {
   font-family: var(--font-script);
   font-weight: 400;
   font-style: normal;
-  line-height: 1.45;
+  line-height: 1.35;
   letter-spacing: 0;
 }
 
