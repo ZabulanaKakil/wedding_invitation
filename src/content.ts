@@ -12,7 +12,7 @@ export const content = {
     envelopeLower: 'images/lower.png',
     envelopeUpper: 'images/upper.png',
     envelopeSeal: 'images/date-seal.svg',
-    coupleArt: 'images/couple-ss2.png',
+    coupleArt: 'images/couple-cream-black.png',
     closedTap: 'Tap To Open',
     openHint: 'Scroll to continue',
   },
