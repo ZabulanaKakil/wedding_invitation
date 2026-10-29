@@ -1,10 +1,16 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { content } from '../content'
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 const PAPER = '#F7F1E6'
 const CARD = '#FBF7F0'
+const OPEN_MS = 2800
+const SKIP_AFTER_MS = 1000
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
 
 type IntroEnvelopeProps = {
   onOpening?: () => void
@@ -12,32 +18,68 @@ type IntroEnvelopeProps = {
 }
 
 export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
-  const [phase, setPhase] = useState<'closed' | 'opening' | 'open'>('closed')
+  const [phase, setPhase] = useState<'closed' | 'opening' | 'open'>(() =>
+    prefersReducedMotion() ? 'open' : 'closed',
+  )
+  const [showSkip, setShowSkip] = useState(false)
   const openedRef = useRef(false)
   const onOpeningRef = useRef(onOpening)
   const onOpenedRef = useRef(onOpened)
+  const timers = useRef<number[]>([])
+  const sceneRef = useRef<HTMLImageElement>(null)
   onOpeningRef.current = onOpening
   onOpenedRef.current = onOpened
   const { couple, intro, weddingDate } = content
+
+  const clearTimers = () => {
+    timers.current.forEach((id) => window.clearTimeout(id))
+    timers.current = []
+  }
+
+  const finish = useCallback(() => {
+    clearTimers()
+    setShowSkip(false)
+    setPhase('open')
+    onOpenedRef.current?.()
+  }, [])
 
   const handleOpen = useCallback(() => {
     if (openedRef.current || phase !== 'closed') return
     openedRef.current = true
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
-      setPhase('open')
-      onOpenedRef.current?.()
+    if (prefersReducedMotion()) {
+      finish()
       return
     }
 
     onOpeningRef.current?.()
     setPhase('opening')
-    // seal 0.5s → flaps ~2.2s → card finishes ~1.3+2.5s
-    window.setTimeout(() => {
-      setPhase('open')
-      onOpenedRef.current?.()
-    }, 4000)
+    timers.current = [
+      window.setTimeout(() => setShowSkip(true), SKIP_AFTER_MS),
+      window.setTimeout(() => finish(), OPEN_MS),
+    ]
+  }, [finish, phase])
+
+  useEffect(() => () => clearTimers(), [])
+
+  useEffect(() => {
+    if (!prefersReducedMotion()) return
+    openedRef.current = true
+    onOpenedRef.current?.()
+  }, [])
+
+  useEffect(() => {
+    if (phase !== 'open') return
+    const reduced = prefersReducedMotion()
+    if (reduced) return
+    const scroller = document.querySelector('.invite-scroll')
+    const scene = sceneRef.current
+    if (!scroller || !scene) return
+    const onScroll = () => {
+      scene.style.transform = `translate3d(0, ${scroller.scrollTop * 0.28}px, 0)`
+    }
+    scroller.addEventListener('scroll', onScroll, { passive: true })
+    return () => scroller.removeEventListener('scroll', onScroll)
   }, [phase])
 
   const flapsAway = phase === 'opening' || phase === 'open'
@@ -86,43 +128,57 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             aria-hidden={phase === 'closed'}
           >
             <div
-              className="flex h-full w-full flex-col items-center justify-center overflow-y-auto px-6 pb-24 pt-6 text-center"
+              className="relative flex h-full w-full flex-col items-center justify-center overflow-y-auto px-6 pb-24 pt-6 text-center"
               style={{
                 backgroundColor: CARD,
                 boxShadow: cardOut
-                  ? '0 28px 64px rgba(42, 36, 32, 0.32), 0 8px 20px rgba(42, 36, 32, 0.14), 0 2px 0 rgba(255,255,255,0.45) inset'
+                  ? '0 28px 64px rgba(31, 58, 46, 0.22), 0 8px 20px rgba(31, 58, 46, 0.12), 0 2px 0 rgba(255,255,255,0.45) inset'
                   : 'none',
               }}
             >
               <img
+                ref={sceneRef}
+                src={asset(intro.heroScene)}
+                alt=""
+                className="hero-scene"
+                width={864}
+                height={1152}
+                decoding="async"
+              />
+              <img
                 src={asset(intro.coupleArt)}
-                alt={`${couple.groom} and ${couple.bride}`}
-                className="mx-auto w-[88%] max-w-[280px] object-contain drop-shadow-[0_12px_28px_rgba(42,36,32,0.18)]"
-                width={600}
-                height={800}
+                alt=""
+                className="relative z-[1] mx-auto w-[78%] max-w-[240px] object-contain drop-shadow-[0_12px_28px_rgba(42,36,32,0.18)]"
+                width={567}
+                height={757}
                 decoding="async"
                 draggable={false}
               />
 
               <div
-                className={`mt-6 w-full transition-opacity duration-[1200ms] ease-out ${
+                className={`relative z-[1] mt-4 w-full transition-opacity duration-[900ms] ease-out ${
                   showOpenCopy ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">
+                <p className="font-seal text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[var(--forest)]">
                   {couple.announcement}
                 </p>
-                <h1 className="mt-2 font-script text-[2.6rem] leading-snug text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
-                  {couple.groom}
+                <h1 className="mt-2 text-[var(--ink)]">
+                  <span className="block font-script text-[2.45rem] leading-snug">
+                    {couple.groom}
+                  </span>
+                  <span className="my-1 block font-script text-2xl text-[var(--gold)]">&</span>
+                  <span className="block font-script text-[2.45rem] leading-snug">
+                    {couple.bride}
+                  </span>
                 </h1>
-                <p className="my-1 font-script text-2xl text-[var(--champagne)]">&</p>
-                <h1 className="font-script text-[2.6rem] leading-snug text-[var(--ink)] drop-shadow-[0_2px_4px_rgba(31,26,22,0.12)]">
-                  {couple.bride}
-                </h1>
-                <p className="mt-4 font-display text-sm font-medium italic text-[var(--ink-soft)]">
+                <p className="mt-3 font-display text-base font-medium italic text-[var(--ink)]">
                   {weddingDate.display}
                 </p>
-                <p className="mx-auto mt-4 max-w-[16rem] font-body text-[0.9rem] leading-relaxed text-[var(--ink-soft)]">
+                <p className="mt-1 font-display text-lg text-[var(--forest)]">
+                  {couple.venueLine}
+                </p>
+                <p className="mx-auto mt-3 max-w-[16rem] font-body text-[0.95rem] leading-relaxed text-[var(--ink-soft)]">
                   {couple.tagline}
                 </p>
               </div>
@@ -130,40 +186,39 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
           </div>
 
           <div
-            className={`envelope-frame relative z-[4] ${
+            className={`relative z-[4] flex flex-col items-center ${
+              phase === 'open' ? 'pointer-events-none' : ''
+            }`}
+          >
+          <div
+            className={`envelope-frame ${
               flapsAway ? 'envelope-frame--opening' : ''
             } ${phase === 'open' ? 'envelope-frame--gone' : ''}`}
           >
-            {/* Lower — top-aligned with upper */}
             <div
-              className={`envelope-lower absolute left-0 right-0 top-0 ${
-                flapsAway ? 'envelope-lower--open' : ''
-              }`}
+              className={`envelope-lower ${flapsAway ? 'envelope-lower--open' : ''}`}
             >
               <img
                 src={asset(intro.envelopeLower)}
                 alt=""
                 className="envelope-plate envelope-plate--lower pointer-events-none"
-                width={706}
-                height={1125}
+                width={728}
+                height={1047}
                 decoding="async"
                 fetchPriority="high"
                 draggable={false}
               />
             </div>
 
-            {/* Upper — natural ratio, no stretch, top-aligned */}
             <div
-              className={`envelope-upper absolute left-0 right-0 top-0 ${
-                flapsAway ? 'envelope-upper--open' : ''
-              }`}
+              className={`envelope-upper ${flapsAway ? 'envelope-upper--open' : ''}`}
             >
               <img
                 src={asset(intro.envelopeUpper)}
                 alt=""
                 className="envelope-plate envelope-plate--upper pointer-events-none"
-                width={1585}
-                height={1373}
+                width={820}
+                height={462}
                 decoding="async"
                 fetchPriority="high"
                 draggable={false}
@@ -182,9 +237,10 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
               />
             </div>
 
+          </div>
             <p
-              className={`pointer-events-none absolute inset-x-0 top-[22%] z-[5] text-center font-script text-[2.5rem] leading-snug text-[#2a1c14] transition-opacity duration-300 ${
-                phase === 'closed' ? 'opacity-100' : 'opacity-0'
+              className={`mt-4 text-center font-script text-[2.15rem] leading-snug text-[var(--forest)] transition-opacity duration-300 ${
+                phase === 'closed' ? 'opacity-100' : 'pointer-events-none opacity-0'
               }`}
             >
               {intro.closedTap}
@@ -192,9 +248,22 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
           </div>
 
           {phase === 'open' && (
-            <p className="absolute bottom-[7%] left-0 right-0 z-[6] text-center font-seal text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[var(--ink)]">
+            <p className="absolute bottom-[7%] left-0 right-0 z-[6] text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[var(--forest)]">
               {intro.openHint}
             </p>
+          )}
+
+          {showSkip && phase === 'opening' && (
+            <button
+              type="button"
+              className="envelope-skip"
+              onClick={(event) => {
+                event.stopPropagation()
+                finish()
+              }}
+            >
+              {intro.skipLabel}
+            </button>
           )}
         </div>
       </div>

@@ -13,15 +13,15 @@ export function Rsvp() {
       className="invite-section section-paper px-6 pb-24"
     >
       <Reveal>
-        <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">
+        <p className="text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[var(--forest)]">
           Kindly reply
         </p>
-        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(20,16,12,0.12)]">
+        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--forest)]">
           {rsvp.title}
         </h2>
         <div className="gold-rule mt-4" />
 
-        <p className="mt-8 text-center font-script text-[2.35rem] leading-snug text-[var(--sage)]">
+        <p className="mt-8 text-center font-script text-[2.35rem] leading-snug text-[var(--forest)]">
           {rsvp.greeting}
         </p>
 
@@ -36,23 +36,23 @@ export function Rsvp() {
         <div className="mt-8 grid gap-10">
           {rsvp.families.map((family) => (
             <div key={family.role} className="text-center">
-              <p className="font-seal text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-[var(--champagne)]">
+              <p className="font-seal text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--forest)]">
                 {family.side}
               </p>
               <p className="mt-2 font-script text-[1.65rem] leading-snug text-[var(--ink)]">
                 {family.father}
               </p>
-              <p className="my-1 font-script text-xl leading-snug text-[var(--champagne)]">
+              <p className="my-1 font-script text-xl leading-snug text-[var(--gold)]">
                 &
               </p>
               <p className="font-script text-[1.65rem] leading-snug text-[var(--ink)]">
                 {family.mother}
               </p>
               <div className="gold-rule mt-3 opacity-70" />
-              <p className="mt-3 font-display text-sm uppercase tracking-[0.2em] text-[var(--sage-soft)]">
+              <p className="mt-3 font-display text-sm uppercase tracking-[0.16em] text-[var(--forest)]">
                 {family.role}
               </p>
-              <p className="mt-1 font-script text-[2rem] leading-snug text-[var(--sage)]">
+              <p className="mt-1 font-script text-[2rem] leading-snug text-[var(--forest)]">
                 {family.child}
               </p>
             </div>
@@ -71,15 +71,15 @@ export function Rsvp() {
           href={rsvp.formUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-gold mt-8 flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3.5 text-center font-body text-sm font-semibold tracking-wide no-underline transition-transform"
+          className="btn-primary mt-8 flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3.5 text-center font-body text-sm font-semibold tracking-wide no-underline transition-transform"
         >
           {rsvp.formButtonLabel}
         </a>
 
-        <p className="mt-12 text-center font-script text-3xl text-[var(--sage)] drop-shadow-[0_2px_6px_rgba(20,16,12,0.12)]">
+        <p className="mt-12 text-center font-script text-3xl text-[var(--forest)]">
           {groomFirst} & {brideFirst}
         </p>
-        <p className="mt-2 text-center font-seal text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[var(--ink-soft)]">
+        <p className="mt-2 text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[var(--ink-soft)]">
           With gratitude
         </p>
       </Reveal>

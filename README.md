@@ -1,4 +1,4 @@
-# Tanvir & Tansia — Wedding Invitation
+# Tanvir & Tasnia — Wedding Invitation
 
 A mobile-first digital wedding invitation card (static site). No backend.
 

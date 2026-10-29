@@ -9,14 +9,14 @@ type PhoneShellProps = {
 /** Centers a mobile-width column; desktop shows the same UI cropped in the middle. */
 export function PhoneShell({ children, allowOverflow = false }: PhoneShellProps) {
   return (
-    <div className="flex h-full w-full items-stretch justify-center bg-[#0c0b0a]">
+    <div className="flex h-full w-full items-stretch justify-center bg-[#12241c]">
       <div
         className={`relative flex h-full w-full max-w-[430px] flex-col shadow-[0_0_80px_var(--shadow)] ${
           allowOverflow ? 'overflow-visible' : 'overflow-hidden'
         }`}
         style={{
           background:
-            'radial-gradient(ellipse at top, #2c2824 0%, #141210 55%, #070605 100%)',
+            'radial-gradient(ellipse at top, #315744 0%, #1f3a2e 55%, #12241c 100%)',
         }}
       >
         {children}

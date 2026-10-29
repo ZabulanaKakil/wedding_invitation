@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { Countdown } from './components/Countdown'
 import { IntroEnvelope } from './components/IntroEnvelope'
-import { LoveStory } from './components/LoveStory'
 import { PhoneShell } from './components/PhoneShell'
 import { Rsvp } from './components/Rsvp'
 import { Venue } from './components/Venue'
@@ -29,7 +29,7 @@ export default function App() {
             setScrollUnlocked(true)
           }}
         />
-        <LoveStory />
+        <Countdown />
         <WeddingDate />
         <Venue />
         <Rsvp />

@@ -2,28 +2,22 @@
 export const content = {
   couple: {
     groom: 'Tanvir Nahian Swapnil',
-    bride: 'Tasnia Akter',
-    announcement: "We would like to invite you to the wedding of ",
-    tagline: 'Together with our families, we invite you to celebrate our wedding.',
+    bride: 'Tasnia Akter Ety',
+    announcement: 'Together with our families',
+    tagline: 'Kindly reply',
+    venueLine: 'Police Convention Hall, Dhaka',
   },
 
   /** Envelope layers + HTML card */
   intro: {
-    envelopeLower: 'images/lower.png',
-    envelopeUpper: 'images/upper.png',
+    envelopeLower: 'images/envelope-body.webp',
+    envelopeUpper: 'images/envelope-flap.webp',
     envelopeSeal: 'images/date-seal.svg',
     coupleArt: 'images/couple-cream-black.png',
+    heroScene: 'images/hero-scene.webp',
     closedTap: 'Tap To Open',
     openHint: 'Scroll to continue',
-  },
-
-  loveStory: {
-    title: 'Our Love Story',
-    paragraphs: [
-      'It began with a Sudden message, one message but different opinions. Arguments and logics led to more converations but in the end the fights became our foundation.',
-      'Through seasons of laughter, patience, and faith, friendship deepened into a promise. Promise turned into love and love turned into us.',
-      'For we chose not to follow the traditional path but to follow our hearts and our dreams. And now we are here, ready to start a new chapter of our lives together.',
-    ],
+    skipLabel: 'Skip',
   },
 
   /** Saturday, 5 December 2026 */
@@ -33,7 +27,15 @@ export const content = {
     day: 5,
     weekdayLabel: 'Saturday',
     display: 'Saturday, 5 December 2026',
-    time: '5:00 PM onwards',
+    time: '2:00 PM onwards',
+    /** Ceremony start, fixed to Dhaka time (14:00). */
+    startsAt: '2026-12-05T14:00:00+06:00',
+    endsAt: '2026-12-05T22:00:00+06:00',
+    calendarTitle: 'Wedding of Tanvir Nahian Swapnil & Tasnia Akter Ety',
+  },
+
+  countdown: {
+    frame: 'images/flower-frame.webp',
   },
 
   venue: {
@@ -65,7 +67,7 @@ export const content = {
         side: 'Daughter of',
         father: 'Late Md Yar Hossain',
         mother: 'Mrs Shahinoor Begum',
-        child: 'Tasnia Akter',
+        child: 'Tasnia Akter Ety',
         role: 'Bride',
       },
     ],

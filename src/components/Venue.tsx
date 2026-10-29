@@ -30,35 +30,35 @@ export function Venue() {
     <section
       id="section-venue"
       data-section
-      className="invite-section section-from-sage-to-paper px-6"
+      className="invite-section section-forest px-6"
     >
       <Reveal>
-        <p className="text-center font-seal text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[var(--sage-soft)]">
+        <p className="text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[var(--gold-bright)]">
           Where we celebrate
         </p>
-        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--sage)]">
+        <h2 className="mt-3 text-center font-display text-4xl font-semibold text-[var(--pearl)]">
           Venue
         </h2>
         <div className="gold-rule mt-4" />
 
         <div className="mt-8 text-center">
-          <h3 className="font-display text-2xl font-semibold text-[var(--ink)]">
+          <h3 className="font-display text-2xl font-semibold text-[var(--pearl)]">
             {venue.name}
           </h3>
-          <p className="mt-1 font-display text-lg italic text-[var(--ink-soft)]">
+          <p className="mt-1 font-display text-lg italic text-[var(--gold-bright)]">
             {venue.subtitle}
           </p>
-          <p className="mt-2 font-body text-sm leading-relaxed text-[var(--ink-soft)]">
+          <p className="mt-2 font-body text-sm leading-relaxed text-[var(--pearl)]">
             {venue.address}
           </p>
-          <p className="mx-auto mt-4 max-w-[18rem] font-body text-sm leading-relaxed text-[var(--ink)]">
+          <p className="mx-auto mt-4 max-w-[18rem] font-body text-sm leading-relaxed text-[var(--gold-bright)]">
             {venue.details}
           </p>
         </div>
 
         <div
           ref={mapRef}
-          className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(20,18,16,0.16)]"
+          className="surface-deep mt-6 overflow-hidden rounded-xl border border-[rgba(201,169,110,0.55)]"
         >
           <div className="relative aspect-[4/3] w-full bg-[var(--paper)]">
             {showMap ? (
@@ -82,9 +82,9 @@ export function Venue() {
           href={venue.mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary mt-5 flex min-h-11 w-full items-center justify-center rounded-full px-5 py-3 text-center font-body text-sm font-semibold tracking-wide no-underline transition-transform"
+          className="btn-gold mt-5 flex min-h-11 w-full items-center justify-center rounded-full px-5 py-3 text-center font-body text-sm font-semibold tracking-wide no-underline transition-transform"
         >
-          Open in Google Maps
+          View on map
         </a>
       </Reveal>
     </section>
