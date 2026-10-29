@@ -5,7 +5,7 @@ export const content = {
     bride: 'Tasnia Akter Ety',
     announcement: 'Together with our families',
     tagline: 'Kindly reply',
-    venueLine: '1st Floor, Police Convention Hall, Dhaka',
+    venueLine: '1st Floor, Police Convention Hall, Eskaton Garden, Dhaka',
   },
 
   /** Envelope layers + HTML card */

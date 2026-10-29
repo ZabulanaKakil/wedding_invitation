@@ -164,6 +164,9 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
                   {weddingDate.display}
                 </p>
                 <p className="mt-1 font-display text-xl text-[var(--forest)]">
+                  {weddingDate.time}
+                </p>
+                <p className="mx-auto mt-2 max-w-[18rem] font-display text-[1.15rem] leading-snug text-[var(--forest)]">
                   {couple.venueLine}
                 </p>
                 <p className="mx-auto mt-3 max-w-[18rem] font-body text-[1.05rem] leading-relaxed text-[var(--ink)]">
