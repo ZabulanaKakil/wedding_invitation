@@ -96,17 +96,18 @@ button {
 }
 
 /*
-  Short top blends only (~8–12%).
-  Rest of each section is solid so headings/body keep WCAG contrast.
+  Cream stays cream through the body copy.
+  Forest joins ease over a fixed band so the change is gradual,
+  and the band sits in the padding above the heading.
 */
 .section-from-paper-to-sage {
-  /* Love story (cream) → date (forest) */
   background: linear-gradient(
     180deg,
-    var(--paper-deep) 0%,
-    #d7cfc0 4%,
-    var(--forest-mid) 8%,
-    var(--forest) 11%,
+    #d4c6b4 0,
+    #c3b5a2 3rem,
+    #8f9484 6.5rem,
+    #4e6b5a 10rem,
+    var(--forest) 13.5rem,
     var(--forest) 100%
   );
 }
@@ -116,23 +117,31 @@ button {
 }
 
 .section-from-sage-to-paper {
-  /* Venue (forest) → RSVP (cream) */
   background: linear-gradient(
     180deg,
-    var(--forest) 0%,
-    var(--forest-mid) 4%,
-    #d7cfc0 8%,
-    var(--paper) 11%,
+    var(--forest) 0,
+    #4e6b5a 3.5rem,
+    #8f9484 7rem,
+    #c3b5a2 10.5rem,
+    #e7dccb 13.5rem,
+    var(--paper) 16rem,
     var(--paper) 100%
   );
+  padding-top: 17.5rem;
 }
 
 .section-paper {
+  background: var(--paper);
+}
+
+.section-paper-fade {
   background: linear-gradient(
     180deg,
     var(--paper) 0%,
-    var(--paper) 88%,
-    var(--paper-deep) 100%
+    var(--paper) 58%,
+    #efe6d8 76%,
+    #e3d4c2 90%,
+    #d4c6b4 100%
   );
 }
 
@@ -172,6 +181,16 @@ button {
   justify-content: center;
   padding-block: 5.5rem;
   box-sizing: border-box;
+}
+
+.invite-section.section-from-paper-to-sage {
+  justify-content: flex-start;
+  padding-top: 15rem;
+}
+
+.invite-section.section-from-sage-to-paper {
+  justify-content: flex-start;
+  padding-top: 17.5rem;
 }
 
 /*
@@ -277,9 +296,19 @@ button {
   box-shadow: var(--shadow-deep);
 }
 
-/* Full-page envelope stage. Height follows the visible column, not dvh. */
+/* Envelope sits in normal flow near the top, so a phone cannot clip it off screen. */
+.envelope-screen {
+  min-height: 100%;
+  overflow: visible;
+}
+
 .envelope-stage {
-  overflow: hidden;
+  overflow: visible;
+}
+
+.envelope-stage--cover {
+  height: 100%;
+  min-height: 100%;
 }
 
 .envelope-stage--open {
@@ -298,9 +327,8 @@ button {
 */
 .envelope-frame {
   position: relative;
-  width: min(78%, 300px);
+  width: min(82vw, 320px);
   margin-top: 0;
-  filter: drop-shadow(0 12px 24px rgba(42, 36, 32, 0.18));
 }
 
 .envelope-stack--gone {
@@ -325,7 +353,7 @@ button {
 
 .envelope-upper,
 .envelope-lower {
-  will-change: transform, opacity;
+  transform: none;
 }
 
 .envelope-lower {
@@ -336,8 +364,8 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 56vh;
-  max-height: 56svh;
+  max-height: 62vh;
+  max-height: 62svh;
   object-fit: contain;
   object-position: center bottom;
 }
@@ -383,7 +411,7 @@ button {
 }
 
 .envelope-upper--open {
-  animation: flapAway 0.9s ease 0.2s forwards;
+  animation: flapAway 1s ease 0.35s forwards;
 }
 
 @keyframes flapAway {
@@ -398,7 +426,7 @@ button {
 }
 
 .envelope-lower--open {
-  animation: bodyAway 0.95s ease 0.35s forwards;
+  animation: bodyAway 1.05s ease 0.55s forwards;
 }
 
 @keyframes bodyAway {
@@ -427,7 +455,7 @@ button {
 
 .envelope-card--rising {
   visibility: visible;
-  animation: cardRiseFull 0.9s ease 0.55s both;
+  animation: cardRiseFull 1s ease 0.85s both;
 }
 
 .envelope-card--settled {
@@ -448,6 +476,52 @@ button {
   100% {
     opacity: 1;
     transform: none;
+  }
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: manipulation;
+  animation: scrollCue 1.35s ease-in-out infinite;
+}
+
+.scroll-cue--cream {
+  color: var(--gold-bright);
+  background: var(--forest);
+  box-shadow:
+    0 12px 26px rgba(31, 58, 46, 0.38),
+    0 0 0 2px var(--gold);
+}
+
+.scroll-cue--forest {
+  color: var(--forest);
+  background: var(--gold-bright);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.32),
+    0 0 0 2px var(--forest);
+}
+
+.scroll-cue:active {
+  animation-play-state: paused;
+}
+
+@keyframes scrollCue {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(7px);
   }
 }
 
@@ -570,10 +644,6 @@ button {
   }
 
   .reveal,
-  .envelope-upper--open,
-  .envelope-lower--open,
-  .envelope-card--rising,
-  .envelope-seal-mark--away,
   .floral-spray,
   .invite-card-reveal {
     animation: none !important;
@@ -589,13 +659,16 @@ button {
     pointer-events: auto !important;
   }
 
-  .envelope-card--hidden,
-  .envelope-card--settled,
-  .envelope-card--rising {
+  .envelope-card--settled {
     transform: none !important;
     filter: none !important;
     opacity: 1 !important;
     visibility: visible !important;
+  }
+
+  .envelope-card--hidden {
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
 
   .envelope-frame--gone {

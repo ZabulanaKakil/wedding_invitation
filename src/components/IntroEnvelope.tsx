@@ -5,12 +5,8 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 const PAPER = '#F7F1E6'
 const CARD = '#FBF7F0'
-const OPEN_MS = 1700
+const OPEN_MS = 2200
 const SKIP_AFTER_MS = 1000
-
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
 
 type IntroEnvelopeProps = {
   onOpening?: () => void
@@ -18,9 +14,7 @@ type IntroEnvelopeProps = {
 }
 
 export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
-  const [phase, setPhase] = useState<'closed' | 'opening' | 'open'>(() =>
-    prefersReducedMotion() ? 'open' : 'closed',
-  )
+  const [phase, setPhase] = useState<'closed' | 'opening' | 'open'>('closed')
   const [showSkip, setShowSkip] = useState(false)
   const openedRef = useRef(false)
   const onOpeningRef = useRef(onOpening)
@@ -48,11 +42,6 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
     if (openedRef.current || phase !== 'closed') return
     openedRef.current = true
 
-    if (prefersReducedMotion()) {
-      finish()
-      return
-    }
-
     onOpeningRef.current?.()
     setPhase('opening')
     timers.current = [
@@ -75,15 +64,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
   }, [handleOpen])
 
   useEffect(() => {
-    if (!prefersReducedMotion()) return
-    openedRef.current = true
-    onOpenedRef.current?.()
-  }, [])
-
-  useEffect(() => {
     if (phase !== 'open') return
-    const reduced = prefersReducedMotion()
-    if (reduced) return
     const scroller = document.querySelector('.invite-scroll')
     const scene = sceneRef.current
     if (!scroller || !scene) return
@@ -104,7 +85,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
       id="section-intro"
       data-section
       className={`relative flex flex-col ${
-        phase === 'open' ? 'min-h-full' : 'h-full min-h-0 overflow-hidden'
+        phase === 'open' ? 'min-h-full' : 'envelope-screen h-full min-h-0'
       }`}
       style={{ backgroundColor: PAPER }}
     >
@@ -115,8 +96,8 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
         style={{ backgroundColor: PAPER }}
       >
         <div
-          className={`envelope-stage relative mx-auto flex w-full max-w-[430px] flex-col items-center justify-center ${
-            phase === 'open' ? 'envelope-stage--open' : 'h-full min-h-0'
+          className={`envelope-stage relative mx-auto flex w-full max-w-[430px] flex-col items-center ${
+            phase === 'open' ? 'envelope-stage--open justify-center' : 'envelope-stage--cover justify-center'
           }`}
           style={{ backgroundColor: PAPER }}
         >
@@ -129,10 +110,10 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             aria-hidden={phase === 'closed'}
           >
             <div
-              className={`hero-sheet relative flex w-full flex-col items-center px-6 text-center ${
+              className={`hero-sheet relative flex w-full flex-col items-center overflow-visible px-6 text-center ${
                 phase === 'open'
-                  ? 'min-h-[100dvh] justify-start pb-14 pt-8'
-                  : 'h-full justify-center overflow-hidden py-6'
+                  ? 'min-h-[100dvh] justify-start pb-28 pt-8'
+                  : 'h-full min-h-0 justify-center py-6'
               }`}
               style={{
                 backgroundColor: CARD,
@@ -153,7 +134,9 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
               <img
                 src={asset(intro.coupleArt)}
                 alt=""
-                className="relative z-[1] mx-auto w-[78%] max-w-[240px] object-contain drop-shadow-[0_12px_28px_rgba(42,36,32,0.18)]"
+                className={`relative z-[1] mx-auto w-auto max-w-[78%] object-contain drop-shadow-[0_12px_28px_rgba(42,36,32,0.18)] ${
+                  phase === 'open' ? 'max-h-none' : 'max-h-[58svh]'
+                }`}
                 width={567}
                 height={757}
                 decoding="async"
@@ -162,7 +145,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
 
               <div
                 className={`hero-copy relative z-[1] transition-opacity duration-[900ms] ease-out ${
-                  showOpenCopy ? 'opacity-100' : 'opacity-0'
+                  showOpenCopy ? 'opacity-100' : 'pointer-events-none absolute h-0 overflow-hidden opacity-0'
                 }`}
               >
                 <p className="font-seal text-[0.875rem] font-semibold uppercase tracking-[0.18em] text-[var(--forest)]">
@@ -257,18 +240,6 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             </p>
           </div>
 
-          {isClosed && (
-            <button
-              ref={hitRef}
-              type="button"
-              className="envelope-hit"
-              aria-label="Open the invitation"
-              onClick={handleOpen}
-            >
-              {intro.closedTap}
-            </button>
-          )}
-
           {showSkip && phase === 'opening' && (
             <button
               type="button"
@@ -283,6 +254,17 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
           )}
         </div>
       </div>
+      {isClosed && (
+        <button
+          ref={hitRef}
+          type="button"
+          className="envelope-hit"
+          aria-label="Open the invitation"
+          onClick={handleOpen}
+        >
+          {intro.closedTap}
+        </button>
+      )}
     </section>
   )
 }

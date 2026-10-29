@@ -35,7 +35,7 @@ export function Countdown() {
     <section
       id="section-countdown"
       data-section
-      className="invite-section section-paper px-6"
+      className="invite-section section-paper-fade px-6"
     >
       <Reveal>
         <p className="text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-[var(--forest)]">
