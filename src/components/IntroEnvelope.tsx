@@ -5,7 +5,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 const PAPER = '#F7F1E6'
 const CARD = '#FBF7F0'
-const OPEN_MS = 2800
+const OPEN_MS = 1700
 const SKIP_AFTER_MS = 1000
 
 function prefersReducedMotion() {
@@ -27,6 +27,7 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
   const onOpenedRef = useRef(onOpened)
   const timers = useRef<number[]>([])
   const sceneRef = useRef<HTMLImageElement>(null)
+  const hitRef = useRef<HTMLButtonElement>(null)
   onOpeningRef.current = onOpening
   onOpenedRef.current = onOpened
   const { couple, intro, weddingDate } = content
@@ -63,6 +64,17 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
   useEffect(() => () => clearTimers(), [])
 
   useEffect(() => {
+    const button = hitRef.current
+    if (!button) return
+    const open = (event: TouchEvent) => {
+      event.preventDefault()
+      handleOpen()
+    }
+    button.addEventListener('touchstart', open, { passive: false })
+    return () => button.removeEventListener('touchstart', open)
+  }, [handleOpen])
+
+  useEffect(() => {
     if (!prefersReducedMotion()) return
     openedRef.current = true
     onOpenedRef.current?.()
@@ -91,44 +103,37 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
     <section
       id="section-intro"
       data-section
-      className="relative flex min-h-[100dvh] flex-col"
+      className={`relative flex flex-col ${
+        phase === 'open' ? 'min-h-full' : 'h-full min-h-0 overflow-hidden'
+      }`}
       style={{ backgroundColor: PAPER }}
     >
       <div
-        role={isClosed ? 'button' : undefined}
-        tabIndex={isClosed ? 0 : undefined}
-        onClick={isClosed ? handleOpen : undefined}
-        onKeyDown={
-          isClosed
-            ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  handleOpen()
-                }
-              }
-            : undefined
-        }
-        aria-label={isClosed ? 'Open the invitation' : undefined}
-        className="relative m-0 flex min-h-[100dvh] w-full items-center justify-center border-0 p-0 text-left outline-none"
-        style={{
-          backgroundColor: PAPER,
-          cursor: isClosed ? 'pointer' : 'default',
-        }}
+        className={`relative m-0 flex w-full items-center justify-center border-0 p-0 text-left outline-none ${
+          phase === 'open' ? 'min-h-full' : 'h-full min-h-0'
+        }`}
+        style={{ backgroundColor: PAPER }}
       >
         <div
-          className="envelope-stage relative mx-auto flex w-full max-w-[430px] items-center justify-center"
-          style={{ backgroundColor: PAPER, minHeight: '100dvh' }}
+          className={`envelope-stage relative mx-auto flex w-full max-w-[430px] flex-col items-center justify-center ${
+            phase === 'open' ? 'envelope-stage--open' : 'h-full min-h-0'
+          }`}
+          style={{ backgroundColor: PAPER }}
         >
           <div
-            className={`envelope-card absolute inset-0 z-[2] ${
-              phase === 'closed' ? 'envelope-card--hidden' : ''
-            } ${phase === 'opening' ? 'envelope-card--rising' : ''} ${
-              phase === 'open' ? 'envelope-card--settled' : ''
+            className={`envelope-card z-[2] ${
+              phase === 'open' ? 'envelope-card--settled' : 'absolute inset-0'
+            } ${phase === 'closed' ? 'envelope-card--hidden' : ''} ${
+              phase === 'opening' ? 'envelope-card--rising' : ''
             }`}
             aria-hidden={phase === 'closed'}
           >
             <div
-              className="relative flex h-full w-full flex-col items-center justify-center overflow-y-auto px-6 pb-24 pt-6 text-center"
+              className={`hero-sheet relative flex w-full flex-col items-center px-6 text-center ${
+                phase === 'open'
+                  ? 'min-h-[100dvh] justify-start pb-14 pt-8'
+                  : 'h-full justify-center overflow-hidden py-6'
+              }`}
               style={{
                 backgroundColor: CARD,
                 boxShadow: cardOut
@@ -156,38 +161,43 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
               />
 
               <div
-                className={`relative z-[1] mt-4 w-full transition-opacity duration-[900ms] ease-out ${
+                className={`hero-copy relative z-[1] transition-opacity duration-[900ms] ease-out ${
                   showOpenCopy ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <p className="font-seal text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[var(--forest)]">
+                <p className="font-seal text-[0.875rem] font-semibold uppercase tracking-[0.18em] text-[var(--forest)]">
                   {couple.announcement}
                 </p>
                 <h1 className="mt-2 text-[var(--ink)]">
-                  <span className="block font-script text-[2.45rem] leading-snug">
+                  <span className="block font-script text-[2.7rem] leading-snug">
                     {couple.groom}
                   </span>
-                  <span className="my-1 block font-script text-2xl text-[var(--gold)]">&</span>
-                  <span className="block font-script text-[2.45rem] leading-snug">
+                  <span className="my-1 block font-script text-[1.85rem] text-[var(--forest)]">&</span>
+                  <span className="block font-script text-[2.7rem] leading-snug">
                     {couple.bride}
                   </span>
                 </h1>
-                <p className="mt-3 font-display text-base font-medium italic text-[var(--ink)]">
+                <p className="mt-3 font-display text-xl font-medium italic text-[var(--ink)]">
                   {weddingDate.display}
                 </p>
-                <p className="mt-1 font-display text-lg text-[var(--forest)]">
+                <p className="mt-1 font-display text-xl text-[var(--forest)]">
                   {couple.venueLine}
                 </p>
-                <p className="mx-auto mt-3 max-w-[16rem] font-body text-[0.95rem] leading-relaxed text-[var(--ink-soft)]">
+                <p className="mx-auto mt-3 max-w-[18rem] font-body text-[1.05rem] leading-relaxed text-[var(--ink)]">
                   {couple.tagline}
                 </p>
+                {phase === 'open' && (
+                  <p className="mt-8 text-center font-seal text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-[var(--forest)]">
+                    {intro.openHint}
+                  </p>
+                )}
               </div>
             </div>
           </div>
 
           <div
             className={`relative z-[4] flex flex-col items-center ${
-              phase === 'open' ? 'pointer-events-none' : ''
+              phase === 'open' ? 'envelope-stack--gone' : ''
             }`}
           >
           <div
@@ -247,10 +257,16 @@ export function IntroEnvelope({ onOpening, onOpened }: IntroEnvelopeProps) {
             </p>
           </div>
 
-          {phase === 'open' && (
-            <p className="absolute bottom-[7%] left-0 right-0 z-[6] text-center font-seal text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[var(--forest)]">
-              {intro.openHint}
-            </p>
+          {isClosed && (
+            <button
+              ref={hitRef}
+              type="button"
+              className="envelope-hit"
+              aria-label="Open the invitation"
+              onClick={handleOpen}
+            >
+              {intro.closedTap}
+            </button>
           )}
 
           {showSkip && phase === 'opening' && (

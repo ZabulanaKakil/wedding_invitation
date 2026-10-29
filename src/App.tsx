@@ -20,7 +20,7 @@ export default function App() {
               ? 'overflow-visible'
               : 'overflow-y-hidden'
         }`}
-        style={{ touchAction: scrollUnlocked ? 'manipulation' : 'none' }}
+        style={{ touchAction: 'manipulation' }}
       >
         <IntroEnvelope
           onOpening={() => setEnvelopeOpening(true)}

@@ -5,7 +5,7 @@ export const content = {
     bride: 'Tasnia Akter Ety',
     announcement: 'Together with our families',
     tagline: 'Kindly reply',
-    venueLine: 'Police Convention Hall, Dhaka',
+    venueLine: '1st Floor, Police Convention Hall, Dhaka',
   },
 
   /** Envelope layers + HTML card */
@@ -40,13 +40,17 @@ export const content = {
 
   venue: {
     name: 'Police Convention Hall',
+    floor: '1st Floor',
     subtitle: 'Eskaton Garden, Ramna',
-    address: '37/3/B Eskaton Garden Road, Ramna, Dhaka',
+    address: '1st Floor, 37/3/B Eskaton Garden Road, Ramna, Dhaka',
     details:
       'Bangladesh Police Officers’ Mess and Convention Hall, beside the Ministry of Expatriates’ Welfare.',
     embedUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6124.832001108692!2d90.39953547533577!3d23.74474587867426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b891f5f213b5%3A0x35180b044b72b5c7!2sPolice%20Convention%20Hall!5e1!3m2!1sen!2sbd!4v1791777943538!5m2!1sen!2sbd',
     mapsUrl: 'https://maps.app.goo.gl/ymdXSbmQxdoYbKdy6',
+    /** Omitting origin makes Google Maps route from the phone's current location. */
+    navigateUrl:
+      'https://www.google.com/maps/dir/?api=1&destination=23.744746,90.399535&travelmode=driving',
   },
 
   rsvp: {

@@ -45,10 +45,13 @@ export function Venue() {
           <h3 className="font-display text-2xl font-semibold text-[var(--pearl)]">
             {venue.name}
           </h3>
+          <p className="mt-2 font-display text-2xl font-semibold text-[var(--gold-bright)]">
+            {venue.floor}
+          </p>
           <p className="mt-1 font-display text-lg italic text-[var(--gold-bright)]">
             {venue.subtitle}
           </p>
-          <p className="mt-2 font-body text-sm leading-relaxed text-[var(--pearl)]">
+          <p className="mt-2 font-body text-base leading-relaxed text-[var(--pearl)]">
             {venue.address}
           </p>
           <p className="mx-auto mt-4 max-w-[18rem] font-body text-sm leading-relaxed text-[var(--gold-bright)]">
@@ -78,14 +81,24 @@ export function Venue() {
           </div>
         </div>
 
-        <a
-          href={venue.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-gold mt-5 flex min-h-11 w-full items-center justify-center rounded-full px-5 py-3 text-center font-body text-sm font-semibold tracking-wide no-underline transition-transform"
-        >
-          View on map
-        </a>
+        <div className="mt-5 grid gap-3">
+          <a
+            href={venue.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-gold flex min-h-12 w-full items-center justify-center rounded-full px-5 py-3 text-center font-body text-base font-semibold tracking-wide no-underline transition-transform"
+          >
+            View on map
+          </a>
+          <a
+            href={venue.navigateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-navigate flex min-h-12 w-full items-center justify-center rounded-full px-5 py-3 text-center font-body text-base font-semibold tracking-wide no-underline transition-transform"
+          >
+            Navigate
+          </a>
+        </div>
       </Reveal>
     </section>
   )
