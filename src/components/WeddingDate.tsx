@@ -45,7 +45,7 @@ function googleCalendarUrl(date: (typeof content)['weddingDate']) {
     dates: `${start}/${end}`,
     ctz: 'Asia/Dhaka',
     location: `${content.venue.name}, ${content.venue.address}`,
-    details: 'Ceremony begins at 2:00 PM.',
+    details: 'Ceremony begins at 1:30 PM.',
   })
   return `https://calendar.google.com/calendar/render?${params.toString()}`
 }

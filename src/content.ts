@@ -27,9 +27,9 @@ export const content = {
     day: 5,
     weekdayLabel: 'Saturday',
     display: 'Saturday, 5 December 2026',
-    time: '2:00 PM onwards',
-    /** Ceremony start, fixed to Dhaka time (14:00). */
-    startsAt: '2026-12-05T14:00:00+06:00',
+    time: '1:30 PM onwards',
+    /** Ceremony start, fixed to Dhaka time (13:30). */
+    startsAt: '2026-12-05T13:30:00+06:00',
     endsAt: '2026-12-05T22:00:00+06:00',
     calendarTitle: 'Wedding of Tanvir Nahian Swapnil & Tasnia Akter Ety',
   },

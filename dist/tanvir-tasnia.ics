@@ -15,10 +15,10 @@ END:VTIMEZONE
 BEGIN:VEVENT
 UID:tanvir-tasnia-wedding-2026@invitation
 DTSTAMP:20261029T043000Z
-DTSTART;TZID=Asia/Dhaka:20261205T140000
+DTSTART;TZID=Asia/Dhaka:20261205T133000
 DTEND;TZID=Asia/Dhaka:20261205T220000
 SUMMARY:Wedding of Tanvir Nahian Swapnil and Tasnia Akter Ety
 LOCATION:Police Convention Hall\, 37/3/B Eskaton Garden Road\, Ramna\, Dhaka
-DESCRIPTION:Ceremony begins at 2:00 PM at Police Convention Hall.
+DESCRIPTION:Ceremony begins at 1:30 PM at Police Convention Hall.
 END:VEVENT
 END:VCALENDAR
