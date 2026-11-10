@@ -4,7 +4,9 @@ import { IntroEnvelope } from './components/IntroEnvelope'
 import { PhoneShell } from './components/PhoneShell'
 import { Rsvp } from './components/Rsvp'
 import { ScrollCue } from './components/ScrollCue'
+import { StudioNote } from './components/StudioNote'
 import { Venue } from './components/Venue'
+import { VisitCount } from './components/VisitCount'
 import { WeddingDate } from './components/WeddingDate'
 
 export default function App() {
@@ -23,6 +25,8 @@ export default function App() {
         <WeddingDate />
         <Venue />
         <Rsvp />
+        <StudioNote />
+        <VisitCount />
       </main>
       <ScrollCue active={scrollUnlocked} />
     </PhoneShell>

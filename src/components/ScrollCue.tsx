@@ -29,8 +29,13 @@ export function ScrollCue({ active }: { active: boolean }) {
       const rect = scroller.getBoundingClientRect()
       const current = sectionAt(rect.left + rect.width / 2, rect.top + rect.height * 0.55)
       const sections = [...scroller.querySelectorAll<HTMLElement>('[data-section]')]
-      const index = current ? sections.indexOf(current) : 0
-      setOnForest(!!current && FOREST_SECTIONS.has(current.id))
+      if (!current) {
+        setOnForest(false)
+        setHasNext(false)
+        return
+      }
+      const index = sections.indexOf(current)
+      setOnForest(FOREST_SECTIONS.has(current.id))
       setHasNext(index >= 0 && index < sections.length - 1)
     }
 
@@ -47,7 +52,8 @@ export function ScrollCue({ active }: { active: boolean }) {
     const rect = scroller.getBoundingClientRect()
     const current = sectionAt(rect.left + rect.width / 2, rect.top + rect.height * 0.55)
     const sections = [...scroller.querySelectorAll<HTMLElement>('[data-section]')]
-    const index = current ? sections.indexOf(current) : 0
+    if (!current) return
+    const index = sections.indexOf(current)
     const next = sections[index + 1]
     if (!next) return
     const top = next.getBoundingClientRect().top - rect.top + scroller.scrollTop

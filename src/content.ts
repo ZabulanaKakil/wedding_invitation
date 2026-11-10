@@ -81,6 +81,27 @@ export const content = {
       'https://docs.google.com/forms/d/e/1FAIpQLSdcaDQocKDSkjnGtQHLKnqB-YBepbme1Ybbt32DU8ORl6wgnQ/viewform?usp=header',
     formButtonLabel: 'Accept the invitation (click here)',
   },
+
+  studio: {
+    teaserTitle: 'Want an invitation like this?',
+    teaserLine: 'Your names, your day, one link guests actually open.',
+    expandLabel: 'Read and order',
+    collapseLabel: 'Show less',
+    eyebrow: 'Made by hand for this day',
+    credit: 'This website was designed and created by Tanvir Nahian Swapnil.',
+    offer: 'You can also order a similar themed website for your own celebration.',
+    headline: 'One link, and your guests have the whole invitation.',
+    pitch:
+      'I can paint a private page in this spirit for your wedding or family celebration: your names, your hour, your hall, and a reply your guests can send from their phone.',
+    points: [
+      'Opens on a phone like a kept card',
+      'Your names, time, venue, and map',
+      'A reply button guests can actually use',
+    ],
+    orderLabel: 'Order a site like this',
+    contactLabel: 'Contact form',
+    email: 'zabulanakakil@gmail.com',
+  },
 } as const
 
 export type Content = typeof content
